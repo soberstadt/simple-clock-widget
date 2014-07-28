@@ -1,5 +1,4 @@
 stylingOptions =
-  # background color
   background: 'rgba(#fff, 0.2)' 
   # show fullscreen -> true
   fullscreen: false
