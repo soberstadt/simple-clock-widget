@@ -1,21 +1,26 @@
 stylingOptions =
-  background: 'rgba(#fff, 0.2)' 
+  # background color
+  background: 'rgba(#fff, 0.2)'
   # show fullscreen -> true
   fullscreen: false
   # display position 'top', 'middle', 'bottom'
   vertical: 'bottom'
+  # display position 'left, 'right'
+  horizontal: 'left'
 
 dateOptions =
   # display not only 'time' also 'date'
   showDate: false
   # format of 'date'
   date: '%d/%m/%Y %a'
+  # format of 'time'
+  time: '%l:%M %p'
 
 format = (->
   if dateOptions.showDate
-    dateOptions.date + '\n' +'%l:%M %p'
+    dateOptions.date + '\n' +dateOptions.time
   else
-    '%l:%M %p'
+    dateOptions.time
 )()
 
 command: "date +\"#{format}\""
@@ -38,7 +43,7 @@ update: (output) ->
     html += '<span class="date">'
     html += data[0]
     html += '</span>'
-    
+
   else
     html = output
 
@@ -50,6 +55,8 @@ style: (->
   transform = 'auto'
   bottom = '3%'
   top = 'auto'
+  left = '3%'
+  right = 'auto'
 
   if stylingOptions.fullscreen
     fontSize = '10em'
@@ -62,11 +69,16 @@ style: (->
     bottom = 'auto'
     top = '3%'
 
+  if stylingOptions.horizontal is 'right'
+    left = 'auto'
+    right = '3%'
+
   return """
     background: #{stylingOptions.background}
     color: #FFFFFF
     font-family: Helvetica Neue
-    left: 3%
+    left: #{left}
+    right: #{right}
     top: #{top}
     bottom: #{bottom}
     transform: #{transform}
